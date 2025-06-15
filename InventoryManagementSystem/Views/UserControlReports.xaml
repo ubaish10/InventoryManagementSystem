@@ -1,0 +1,96 @@
+﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="InventoryManagementSystem.Views.UserControlReports"
+             Height="789">
+    <Grid Margin="0,10,0,0" Background="#00172D">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Styled Button -->
+        <StackPanel Orientation="Horizontal" Margin="0,42,0,0">
+            <Button Content="Generate Reports"
+                    Width="120"
+                    Command="{Binding GenerateReportsCommand}"
+                    Background="#1A1A40"
+                    Foreground="White"
+                    BorderBrush="White"
+                    Height="40"/>
+        </StackPanel>
+
+        <!-- Styled TabControl & DataGrids -->
+        <TabControl Grid.Row="1" Margin="0,10,0,10"
+                    Background="#00172D"
+                    Foreground="White"
+                    BorderBrush="White">
+            <TabItem Header="Most Ordered Products">
+                <DataGrid ItemsSource="{Binding MostOrderedProducts}"
+                          Background="#002147"
+                          Foreground="White"
+                          BorderBrush="White"
+                          RowBackground="#003366"
+                          AlternatingRowBackground="#00172D"
+                          GridLinesVisibility="All" Height="626" Margin="5,0,5,0">
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="#1A1A40"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}" Width="*"/>
+                        <DataGridTextColumn Header="Total Ordered" Binding="{Binding TotalOrdered}" Width="100"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <TabItem Header="Supplier Performance">
+                <DataGrid ItemsSource="{Binding SupplierPerformance}"
+                          Background="#002147"
+                          Foreground="White"
+                          BorderBrush="White"
+                          RowBackground="#003366"
+                          AlternatingRowBackground="#00172D"
+                          GridLinesVisibility="All">
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="#1A1A40"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Supplier Name" Binding="{Binding SupplierName}" Width="*"/>
+                        <DataGridTextColumn Header="Total Orders" Binding="{Binding TotalOrders}" Width="100"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <TabItem Header="Stock Turnover">
+                <DataGrid ItemsSource="{Binding StockTurnover}"
+                          Background="#002147"
+                          Foreground="White"
+                          BorderBrush="White"
+                          RowBackground="#003366"
+                          AlternatingRowBackground="#00172D"
+                          GridLinesVisibility="All">
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="#1A1A40"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}" Width="*"/>
+                        <DataGridTextColumn Header="Turnover Rate" Binding="{Binding TurnoverRate, StringFormat=F2}" Width="100"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+        <TextBlock Text="View Reports"
+            FontSize="20"
+            FontWeight="Bold"
+            Foreground="White"
+            TextAlignment="Center" Margin="5,0,0,65"/>
+    </Grid>
+</UserControl>

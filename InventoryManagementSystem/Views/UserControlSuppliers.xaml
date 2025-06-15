@@ -1,0 +1,60 @@
+﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="av"
+             x:Class="InventoryManagementSystem.Views.UserControlSuppliers"
+             av:DesignWidth="646.4" Height="787">
+    <Grid Margin="10,10,10,10" Background="#00172D">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Input Form -->
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Margin="5" Height="223" Width="406">
+                <TextBlock Text="Manage Suppliers"
+           FontSize="20"
+           FontWeight="Bold"
+           Foreground="White"
+           Margin="5,0,0,10" TextAlignment="Center"/>
+
+                <TextBlock Text="Name:" Foreground="White"/>
+                <TextBox Width="280" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                         Background="#003366" Foreground="White" BorderBrush="White"/>
+
+                <TextBlock Text="Contact Info:" Margin="0,10,0,0" Foreground="White"/>
+                <TextBox Width="280" Text="{Binding ContactInfo, UpdateSourceTrigger=PropertyChanged}"
+                         Background="#003366" Foreground="White" BorderBrush="White"/>
+
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Height="55" Width="275">
+                    <Button Content="Add" Width="80" Command="{Binding AddCommand}"
+                            Background="#FF00A807" Foreground="White" BorderBrush="White" Height="40"/>
+                    <Button Content="Update" Width="80" Margin="10,0,0,0" Command="{Binding UpdateCommand}"
+                            Background="#FF3B3BAD" Foreground="White" BorderBrush="White" Height="40"/>
+                    <Button Content="Delete" Width="80" Margin="10,0,0,0" Command="{Binding DeleteCommand}"
+                            Background="#FFC70000" Foreground="White" BorderBrush="White" Height="40"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Data Grid -->
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Suppliers}" SelectedItem="{Binding SelectedSupplier}"
+                  Background="#002147" Foreground="White" BorderBrush="White"
+                  RowBackground="#003366" AlternatingRowBackground="#00172D"
+                  GridLinesVisibility="All" Margin="5,5,5,0" Height="519" VerticalAlignment="Top">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="#1A1A40"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Contact Info" Binding="{Binding ContactInfo}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

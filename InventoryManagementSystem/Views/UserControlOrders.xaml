@@ -1,0 +1,93 @@
+﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av"
+             x:Class="InventoryManagementSystem.Views.UserControlOrders"
+             Height="792" av:DesignWidth="1018.621">
+    <Grid Margin="10" Background="#00172D">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Input Form -->
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,405" Grid.RowSpan="2">
+            <StackPanel Margin="5" Height="387" Width="428">
+                <TextBlock Text="Manage Orders"
+           FontSize="20"
+           FontWeight="Bold"
+           Foreground="White"
+           Margin="5,0,0,10" TextAlignment="Center"/>
+
+                <TextBlock Text="Product:" Foreground="White"/>
+                <ComboBox Width="280" ItemsSource="{Binding Products}" SelectedValue="{Binding ProductId}" 
+                          DisplayMemberPath="Name" SelectedValuePath="Id"
+                          Background="#003366" Foreground="Black" BorderBrush="White" FontSize="14">
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ComboBoxItem}">
+                            <Setter Property="Background" Value="#003366"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                </ComboBox>
+
+                <TextBlock Text="Supplier:" Margin="0,10,0,0" Foreground="White"/>
+                <ComboBox Width="280" ItemsSource="{Binding Suppliers}" SelectedValue="{Binding SupplierId}" 
+                          DisplayMemberPath="Name" SelectedValuePath="Id"
+                          Background="#003366" Foreground="Black" BorderBrush="White" FontSize="14">
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ComboBoxItem}">
+                            <Setter Property="Background" Value="#003366"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                </ComboBox>
+
+                <TextBlock Text="Quantity:" Margin="0,10,0,0" Foreground="White"/>
+                <TextBox Width="280" Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" 
+                         Background="#003366" Foreground="White" BorderBrush="White"/>
+
+                <TextBlock Text="Order Date:" Margin="0,10,0,0" Foreground="White"/>
+                <DatePicker Width="280" SelectedDate="{Binding OrderDate}"
+                            Background="#003366" Foreground="Black" BorderBrush="White" FontSize="14"/>
+
+                <TextBlock Text="Status:" Margin="0,10,0,0" Foreground="White"/>
+                <ComboBox Width="280" SelectedValue="{Binding Status}" 
+                          Background="#003366" Foreground="Black" BorderBrush="White" FontSize="14">
+                    <ComboBoxItem Content="Pending"/>
+                    <ComboBoxItem Content="Completed"/>
+                    <ComboBoxItem Content="Cancelled"/>
+                </ComboBox>
+
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Height="51" Width="282">
+                    <Button Content="Add" Width="80" Command="{Binding AddCommand}"
+                            Background="#FF00A807" Foreground="White" BorderBrush="White" Height="40"/>
+                    <Button Content="Update" Width="80" Margin="10,0,0,0" Command="{Binding UpdateCommand}"
+                            Background="#FF3B3BAD" Foreground="White" BorderBrush="White" Height="40"/>
+                    <Button Content="Delete" Width="80" Margin="10,0,0,0" Command="{Binding DeleteCommand}"
+                            Background="#FFC70000" Foreground="White" BorderBrush="White" Height="40"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Data Grid -->
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Orders}" SelectedItem="{Binding SelectedOrder}" 
+                  Background="#002147" Foreground="White" BorderBrush="White"
+                  RowBackground="#003366" AlternatingRowBackground="#00172D"
+                  GridLinesVisibility="All" Margin="5,386,5,0" Height="376" VerticalAlignment="Top">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="#1A1A40"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                <DataGridTextColumn Header="Product ID" Binding="{Binding ProductId}" Width="90"/>
+                <DataGridTextColumn Header="Supplier ID" Binding="{Binding SupplierId}" Width="90"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="90"/>
+                <DataGridTextColumn Header="Order Date" Binding="{Binding OrderDate, StringFormat=MM/dd/yyyy}" Width="120"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
